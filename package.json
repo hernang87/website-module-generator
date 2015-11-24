@@ -1,12 +1,12 @@
 {
-  "name": "html-exporter",
+  "name": "website-module-generator",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Hernan Garchtrom @ R/GA",
+  "author": "Hernan Garchtrom",
   "license": "ISC",
   "dependencies": {
     "gulp": "^3.9.0",
