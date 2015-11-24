@@ -1,0 +1,8 @@
+{
+	"header": {
+		"title": "I am a title on a partial"
+	},
+	"footer": {
+		"text": "I am a footer on a partial as well!" 
+	}
+}

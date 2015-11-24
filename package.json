@@ -1,0 +1,25 @@
+{
+  "name": "html-exporter",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hernan Garchtrom @ R/GA",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp-compile-handlebars": "^0.5.0",
+    "gulp-data-json": "^0.1.0",
+    "gulp-hb": "^2.6.5",
+    "gulp-plumber": "^1.0.1",
+    "gulp-rename": "^1.2.2",
+    "handlebars": "^4.0.3",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "gulp-data": "^1.2.0",
+    "path": "^0.12.7"
+  }
+}
