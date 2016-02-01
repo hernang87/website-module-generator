@@ -2,7 +2,7 @@
 	"filename": "index",
 	"css": [
 		{
-			"url": "css/index.css"
+			"url": "css/externalStyles.css"
 		}
 	],
 	"js": [
