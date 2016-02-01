@@ -1,21 +1,23 @@
 {
+	"filename": "index",
 	"css": [
 		{
 			"url": "css/index.css"
-		},
-		{
-			"url": "css/index2.css"
 		}
 	],
 	"js": [
 		{
-			"url": "js/index.js"
+			"url": "js/module.js"
 		}
 	],
+	
 	"header": {
 		"title": "I am a title on a partial"
 	},
 	"footer": {
 		"text": "I am a footer on a partial as well!" 
+	},
+	"content": {
+		"paragraph": "I am a content on context.json"
 	}
 }
