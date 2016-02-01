@@ -4,18 +4,22 @@ var gulp = require('gulp'),
 	path = require('path'),
 	fs = require('fs'),
 	data = require('gulp-data'),
-	plumber = require('gulp-plumber');
+	plumber = require('gulp-plumber'),
+    rename = require('gulp-rename'),
+    sass = require('gulp-sass'),
+    sourcemaps = require('gulp-sourcemaps');
 
 var paths = {
 	jsonFiles	: './src/pages/**/*.json',
 	pages		: './src/pages/**/*.hbs',
 	partials 	: './src/partials',
+    sass        : './src/scss/**/*.scss',
 	contextJson : 'context.json',
 	dist		: 'dist'
 };
 
 
-gulp.task('hbs:build', function () {
+gulp.task('hbs', function () {
     var options = {
         ignorePartials: true,
         batch : [paths.partials]        
@@ -37,14 +41,27 @@ gulp.task('hbs:build', function () {
         .pipe(gulp.dest(paths.dist));
 });
 
+gulp.task('sass', function() {
+    return gulp.src(paths.sass)
+        .pipe(sourcemaps.init())
+        .pipe(sass())
+        .pipe(sourcemaps.write())
+        .pipe(rename({
+            dirname: 'css',
+            extname: '.css'
+        }))
+        .pipe(gulp.dest('./dist'));
+});
+
 gulp.task('watch', function() {
-	var tasks = ['hbs:build'];
+	var tasks = ['hbs'];
 
 	gulp.watch(paths.pages, tasks);
 	gulp.watch(paths.partials + '/*.hbs', tasks);
 	gulp.watch(paths.partials + '/**/*.hbs', tasks);
 	gulp.watch(paths.jsonFiles, tasks);
+    gulp.watch(paths.sass, ['sass']);
 
 });
 
-gulp.task('default', ['watch']);
+gulp.task('default', ['hbs','sass','watch']);
