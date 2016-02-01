@@ -14,6 +14,7 @@ var paths = {
 	pages		: './src/pages/**/*.hbs',
 	partials 	: './src/partials',
     sass        : './src/scss/**/*.scss',
+    js          : './src/js/**/*.js',
 	contextJson : 'context.json',
 	dist		: 'dist'
 };
@@ -22,7 +23,23 @@ var paths = {
 gulp.task('hbs', function () {
     var options = {
         ignorePartials: true,
-        batch : [paths.partials]        
+        batch : [paths.partials],
+        helpers: {
+            styles: function (arr) {
+                var str = '';
+                arr.forEach(function(css) {
+                    str += '<link href="' + css.url + '" rel="stylesheet" type="text/css" />';
+                });
+                return new handlebars.Handlebars.SafeString(str);
+            },
+            scripts: function(arr) {
+                var str = '';
+                arr.forEach(function(js) {
+                    str += '<script src="' + js.url + '" type="text/javascript"></script>';
+                });
+                return new handlebars.Handlebars.SafeString(str);
+            }
+        }       
     };
     
     return gulp.src(paths.pages)
@@ -53,6 +70,15 @@ gulp.task('sass', function() {
         .pipe(gulp.dest('./dist'));
 });
 
+gulp.task('js', function() {
+    return gulp.src(paths.js)        
+        .pipe(rename({
+            dirname: 'js',
+            extname: '.js'
+        }))
+        .pipe(gulp.dest('./dist'));
+});
+
 gulp.task('watch', function() {
 	var tasks = ['hbs'];
 
@@ -61,7 +87,7 @@ gulp.task('watch', function() {
 	gulp.watch(paths.partials + '/**/*.hbs', tasks);
 	gulp.watch(paths.jsonFiles, tasks);
     gulp.watch(paths.sass, ['sass']);
-
+    gulp.watch(paths.js, ['js']);
 });
 
-gulp.task('default', ['hbs','sass','watch']);
+gulp.task('default', ['hbs', 'sass', 'js', 'watch']);

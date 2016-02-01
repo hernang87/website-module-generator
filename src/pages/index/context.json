@@ -1,4 +1,17 @@
 {
+	"css": [
+		{
+			"url": "css/index.css"
+		},
+		{
+			"url": "css/index2.css"
+		}
+	],
+	"js": [
+		{
+			"url": "js/index.js"
+		}
+	],
 	"header": {
 		"title": "I am a title on a partial"
 	},
