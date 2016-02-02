@@ -10,6 +10,11 @@
 			"url": "js/module.js"
 		}
 	],
+	"modules": [
+		{
+			"name": "article-list"
+		}
+	],
 	
 	"header": {
 		"title": "I am a title on a partial"
