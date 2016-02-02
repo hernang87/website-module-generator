@@ -15,6 +15,7 @@ var paths = {
 	partials 	: './src/partials',
     sass        : './src/scss/**/*.scss',
     js          : './src/js/**/*.js',
+    img         : ['./src/img/**/*.png', './src/img/**/*.jpg'],
 	contextJson : 'context.json',
 	dist		: 'dist'
 };
@@ -79,6 +80,15 @@ gulp.task('js', function() {
         .pipe(gulp.dest('./dist'));
 });
 
+gulp.task('img', function() {
+    console.log(paths.img);
+    return gulp.src(paths.img) 
+        .pipe(rename(function(path) {  
+            path.dirname = 'img/' + path.dirname;
+        }))
+        .pipe(gulp.dest('./dist'));
+});
+
 gulp.task('watch', function() {
 	var tasks = ['hbs'];
 
@@ -88,6 +98,7 @@ gulp.task('watch', function() {
 	gulp.watch(paths.jsonFiles, tasks);
     gulp.watch(paths.sass, ['sass']);
     gulp.watch(paths.js, ['js']);
+    gulp.watch(paths.img, ['img']);
 });
 
-gulp.task('default', ['hbs', 'sass', 'js', 'watch']);
+gulp.task('default', ['hbs', 'sass', 'js', 'img', 'watch']);
