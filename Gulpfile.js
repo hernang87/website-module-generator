@@ -80,8 +80,7 @@ gulp.task('js', function() {
         .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('img', function() {
-    console.log(paths.img);
+gulp.task('img', function() {    
     return gulp.src(paths.img) 
         .pipe(rename(function(path) {  
             path.dirname = 'img/' + path.dirname;
@@ -90,7 +89,7 @@ gulp.task('img', function() {
 });
 
 gulp.task('watch', function() {
-	var tasks = ['hbs'];
+	var tasks = ['hbs', 'sass', 'js', 'img'];
 
 	gulp.watch(paths.pages, tasks);
 	gulp.watch(paths.partials + '/*.hbs', tasks);

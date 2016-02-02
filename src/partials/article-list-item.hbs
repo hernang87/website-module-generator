@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-4">
+		<article>
+			<img src="{{img}}" />
+			<div class="text-block">
+				<h4>{{title}}</h4>
+				<p>{{description}}</p>
+				{{#if link}}
+					<a href="{{link}}">
+						{{#if linkLabel}}
+							{{linkLabel}}
+						{{else}}
+							Read Article
+						{{/if}}					
+					</a>					
+				{{/if}}
+			</div>
+		</article>
+	</div>
+</div>

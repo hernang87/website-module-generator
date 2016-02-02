@@ -17,7 +17,26 @@
 	"footer": {
 		"text": "I am a footer on a partial as well!" 
 	},
-	"content": {
-		"paragraph": "I am a content on context.json"
+
+	"article-list": {		
+		"mainTitle": "main_title_parameter",
+		"heading": "Further reading",
+		"subheading": "See all makeup articles",
+		"articles": [
+			{
+				"title": "Water Intake",
+				"description": "To prevent and protect against fine lines and wrinkles, hydration is a must.",
+				"link": "#",
+				"img": "img/pages/index/article-01.jpg"
+			},
+			{
+				"title": "The Pore Vanisher",
+				"description": "To prevent and protect against fine lines and wrinkles, hydration is a must.",
+				"link": "#",
+				"linkLabel": "click here",
+				"img": "img/pages/index/article-02.jpg"
+			}
+		]
 	}
+
 }
