@@ -7,11 +7,7 @@
 				<p>{{description}}</p>
 				{{#if link}}
 					<a href="{{link}}">
-						{{#if linkLabel}}
-							{{linkLabel}}
-						{{else}}
-							Read Article
-						{{/if}}					
+						{{ifNotEmpty linkLabel "Read Article"}}			
 					</a>					
 				{{/if}}
 			</div>

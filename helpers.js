@@ -30,6 +30,12 @@ var handlebarsHelpers = {
             str += '<script src="js/' + js.name + '.js" type="text/javascript"></script>';
         });
         return new handlebars.Handlebars.SafeString(str);
+    },
+    ifNotEmpty: function(elem1, elem2) {
+    	if(elem1) {
+    		return elem1;
+    	}
+    	return elem2;
     }
 };
 
