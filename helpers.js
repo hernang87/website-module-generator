@@ -33,9 +33,9 @@ var handlebarsHelpers = {
     },
     ifNotEmpty: function(elem1, elem2) {
     	if(elem1) {
-    		return elem1;
+    		return handlebars.Handlebars.SafeString(elem1);
     	}
-    	return elem2;
+    	return handlebars.Handlebars.SafeString(elem2);
     }
 };
 
