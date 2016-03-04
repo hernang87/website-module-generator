@@ -4,21 +4,30 @@ var gulp = require('gulp'),
 	path = require('path'),
 	fs = require('fs'),
 	data = require('gulp-data'),
-	plumber = require('gulp-plumber');
+	plumber = require('gulp-plumber'),
+    rename = require('gulp-rename'),
+    sass = require('gulp-sass'),
+    sourcemaps = require('gulp-sourcemaps'),
+    handlebarsHelpers = require('./helpers');
+
 
 var paths = {
 	jsonFiles	: './src/pages/**/*.json',
 	pages		: './src/pages/**/*.hbs',
 	partials 	: './src/partials',
+    sass        : './src/scss/**/*.scss',
+    js          : './src/js/**/*.js',
+    img         : ['./src/img/**/*.png', './src/img/**/*.jpg'],
 	contextJson : 'context.json',
 	dist		: 'dist'
 };
 
 
-gulp.task('hbs:build', function () {
+gulp.task('hbs', function () {
     var options = {
         ignorePartials: true,
-        batch : [paths.partials]        
+        batch : [paths.partials],
+        helpers: handlebarsHelpers    
     };
     
     return gulp.src(paths.pages)
@@ -37,14 +46,45 @@ gulp.task('hbs:build', function () {
         .pipe(gulp.dest(paths.dist));
 });
 
+gulp.task('sass', function() {
+    return gulp.src(paths.sass)
+        .pipe(sourcemaps.init())
+        .pipe(sass())
+        .pipe(sourcemaps.write())
+        .pipe(rename({
+            dirname: 'css',
+            extname: '.css'
+        }))
+        .pipe(gulp.dest('./dist'));
+});
+
+gulp.task('js', function() {
+    return gulp.src(paths.js)        
+        .pipe(rename({
+            dirname: 'js',
+            extname: '.js'
+        }))
+        .pipe(gulp.dest('./dist'));
+});
+
+gulp.task('img', function() {    
+    return gulp.src(paths.img) 
+        .pipe(rename(function(path) {  
+            path.dirname = 'img/' + path.dirname;
+        }))
+        .pipe(gulp.dest('./dist'));
+});
+
 gulp.task('watch', function() {
-	var tasks = ['hbs:build'];
+	var tasks = ['hbs', 'sass', 'js', 'img'];
 
 	gulp.watch(paths.pages, tasks);
 	gulp.watch(paths.partials + '/*.hbs', tasks);
 	gulp.watch(paths.partials + '/**/*.hbs', tasks);
 	gulp.watch(paths.jsonFiles, tasks);
-
+    gulp.watch(paths.sass, ['sass']);
+    gulp.watch(paths.js, ['js']);
+    gulp.watch(paths.img, ['img']);
 });
 
-gulp.task('default', ['watch']);
+gulp.task('default', ['hbs', 'sass', 'js', 'img', 'watch']);
